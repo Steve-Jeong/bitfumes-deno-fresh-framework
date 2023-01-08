@@ -1,0 +1,36 @@
+POST http://localhost:8000/api/abc
+
+###
+// api의 POST handler는 호출 잘됨.
+POST http://localhost:8000/api/github
+Content-Type: application/json
+
+{
+  "q" : "nodejs"
+}
+
+###
+// POST handler는 page component가 있어도 호출 잘 됨
+POST http://localhost:8000/using_island/github
+Content-Type: application/json
+
+{
+  "q" : "steve-jeong"
+}
+
+
+###
+GET http://localhost:8000/api/github
+
+###
+// page component가 없는 api GET handler는 호출 잘됨.
+GET http://localhost:8000/api/github?q=steve-jeong
+
+###
+// page component가 있는 GET handler는 호출 안됨.
+GET http://localhost:8000/using_island/github?q=steve-jeong
+
+###
+// form handler를 이용한 island를 거치지 않는 data fetching -> 잘 안됨. Form data를 rest client에서 호출하는 방법은?
+GET http://localhost:8000/using_no_island/github?q=nodejs
+
